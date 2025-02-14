@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, FlatList } from 'react-native'
 
 const ListaTareas = ({ tareas }) => {
   return (
@@ -26,3 +26,5 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
+
+export default ListaTareas

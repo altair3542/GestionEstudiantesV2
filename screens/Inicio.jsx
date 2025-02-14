@@ -2,14 +2,18 @@ import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import BotonPersonalizado from '../components/BotonPersonalizado'
 
-const Inicio = () => {
+const Inicio = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.titulo}>Gestion de Estudiantes</Text>
-      <BotonPersonalizado titulo="Ver Estudiantes" onPress={() => navigation.navigate('ListaEstudiantes')} />
+      <BotonPersonalizado
+        titulo="Ver Estudiantes"
+        onPress={() => navigation.navigate('ListaEstudiantes')}
+      />
     </View>
   )
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -26,4 +30,3 @@ const styles = StyleSheet.create({
 })
 
 export default Inicio
-
