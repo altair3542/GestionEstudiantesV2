@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import { View, TextInput, StyleSheet } from 'react-native';
 import BotonPersonalizado from '../components/BotonPersonalizado';
 
-const EditarEstudiante = ({ navigation, route }) => {
+const EditarEstudiante = ({ navigation, route, estudiantes, setEstudiantes }) => {
   const estudianteExistente = route?.params?.estudiante || null;
 
   const [nombre, setNombre] = useState(estudianteExistente?.nombre || '');
   const [carrera, setCarrera] = useState(estudianteExistente?.carrera || '');
 
   const guardarEstudiante = () => {
-    const nuevoEstudiante = { id: estudianteExistente?.id || Date.now().toString(), nombre, carrera };
+    let nuevaLista
+    if (estudianteExistente) {
+      nuevaLista = estudiantes.map(est =>
+        est.id === estudianteExistente.id ? { ...est, nombre, carrera } : est
+      )
+    } else {
+      nuevaLista = [...estudiantes, {id: Date.now().toString(), nombre, carrera}]
+    }
 
-    navigation.navigate('ListaEstudiantes', { estudiante: nuevoEstudiante });
+    setEstudiantes(nuevaLista)
+    navigation.navigate('ListaEstudiantes')
   };
 
   return (

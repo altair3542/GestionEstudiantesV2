@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, FlatList, StyleSheet } from 'react-native';
+import BotonPersonalizado from '../components/BotonPersonalizado';
 import TarjetaEstudiante from '../components/TarjetaEstudiante';
 
-const ListaEstudiantes = ({ navigation }) => {
-  const [estudiantes, setEstudiantes] = useState([
-    { id: '1', nombre: 'Carlos Pérez', carrera: 'Ingeniería' },
-    { id: '2', nombre: 'María González', carrera: 'Administración' },
-  ]);
+const ListaEstudiantes = ({ navigation, estudiantes, setEstudiantes }) => {
+  const eliminarEstudiante = (id) => {
+    setEstudiantes(estudiantes.filter(est => est.id !== id))
+  }
+
 
   return (
     <View style={styles.container}>
@@ -18,9 +19,11 @@ const ListaEstudiantes = ({ navigation }) => {
             estudiante={item}
             onVerDetalles={() => navigation.navigate('DetallesEstudiante', { estudiante: item })}
             onEditar={() => navigation.navigate('EditarEstudiante', { estudiante: item })}
+            onEliminar={() => eliminarEstudiante(item.id)}
           />
         )}
       />
+      <BotonPersonalizado titulo="Agregar Estudiante" onPress={() => navigation.navigate('EditarEstudiante')} />
     </View>
   );
 };
