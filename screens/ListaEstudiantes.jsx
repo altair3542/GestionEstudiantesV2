@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import { View, StyleSheet } from 'react-native';
-import BotonPersonalizado from '../components/BotonPersonalizado';
-import ListaTareas from '../components/ListaTareas';
+import { View, FlatList, StyleSheet } from 'react-native';
+import TarjetaEstudiante from '../components/TarjetaEstudiante';
 
 const ListaEstudiantes = ({ navigation }) => {
   const [estudiantes, setEstudiantes] = useState([
-    { id: '1', nombre: 'Belarmino de las Casas' },
-    { id: '2', nombre: 'Armando la Cruz'},
-    { id: '3', nombre: 'Abraham Mesa Cueva'},
-  ])
+    { id: '1', nombre: 'Carlos Pérez', carrera: 'Ingeniería' },
+    { id: '2', nombre: 'María González', carrera: 'Administración' },
+  ]);
 
   return (
     <View style={styles.container}>
-      <ListaTareas tareas={estudiantes} />
-      <BotonPersonalizado titulo="Ver Detalles" onPress={() => navigation.navigate('DetallesEstudiante')} />
-      <BotonPersonalizado titulo="Agregar Estudiante" onPress={() => console.log('abrir formulario')} />
+      <FlatList
+        data={estudiantes}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => (
+          <TarjetaEstudiante
+            estudiante={item}
+            onVerDetalles={() => navigation.navigate('DetallesEstudiante', { estudiante: item })}
+            onEditar={() => navigation.navigate('EditarEstudiante', { estudiante: item })}
+          />
+        )}
+      />
     </View>
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 20,
-  }
-})
+  container: { flex: 1, padding: 20 },
+});
 
-export default ListaEstudiantes
+export default ListaEstudiantes;

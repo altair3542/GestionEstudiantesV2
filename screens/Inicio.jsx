@@ -7,8 +7,10 @@ const Inicio = ({ navigation }) => {
     <View style={styles.container}>
       <Text style={styles.titulo}>Gestion de Estudiantes</Text>
       <BotonPersonalizado
-        titulo="Ver Estudiantes"
-        onPress={() => navigation.navigate('ListaEstudiantes')}
+        titulo="Ver Estudiantes" color="#28a745" onPress={() => navigation.navigate('ListaEstudiantes')}
+      />
+      <BotonPersonalizado
+        titulo="Agregar Estudiante" color="#DC3545" onPress={() => navigation.navigate('EditarEstudiante')}
       />
     </View>
   )
